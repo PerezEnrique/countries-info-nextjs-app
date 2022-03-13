@@ -1,26 +1,17 @@
 import React from 'react';
-import { getCountries } from '../services/countriesService';
+import { getCountries } from 'services/countriesService';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { Country } from '../countries.types';
+import { Country } from 'countries.types';
 
-export const getStaticProps: GetStaticProps<{countries: Country[], error?: string}> = async () => {
-    try {
-        return {
-            props: {
-                countries: await getCountries()
-            }
-        }
-    } catch (err) {
-        return {
-            props: {
-                countries: [],
-                error: "Sorry, something went wrong, please try refreshing the page later"
-            }
+export const getStaticProps: GetStaticProps<{countries: Country[]}> = async () => {
+    return {
+        props: {
+            countries: await getCountries()
         }
     }
 }
 
-export default function index({countries, error}: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function index({countries}: InferGetStaticPropsType<typeof getStaticProps>) {
   
     return (
     <div>
