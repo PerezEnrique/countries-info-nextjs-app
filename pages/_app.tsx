@@ -1,17 +1,16 @@
-import { Fragment } from 'react';
-import Header from 'components/Header';
+import { Fragment } from "react";
+import Header from "components/Header";
 import "assets/styles/styles.scss";
-import useTheme from 'hooks/useTheme';
-import type { AppProps } from 'next/app'
+import useTheme from "hooks/useTheme";
+import type { AppProps } from "next/app";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const [darkTheme, setDarkTheme] = useTheme("dark-theme", "dark-theme");
 
-  const [darkTheme, setDarkTheme] = useTheme("dark-theme", "dark-theme")
-
-  return ( 
+  return (
     <Fragment>
-      <Header darkTheme={darkTheme} toggleTheme={setDarkTheme}/>
+      <Header darkTheme={darkTheme} toggleTheme={setDarkTheme} />
       <Component {...pageProps} />
     </Fragment>
-  )
+  );
 }
