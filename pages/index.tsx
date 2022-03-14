@@ -1,7 +1,6 @@
-import React from 'react';
 import { getCountries } from 'services/countriesService';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { Country } from 'countries.types';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { Country } from 'countries.types';
 
 export const getStaticProps: GetStaticProps<{countries: Country[]}> = async () => {
     return {
