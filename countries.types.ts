@@ -10,7 +10,7 @@ export type Country = {
     currencies: Record<string, []>
     capital: string[]
     region: string[]
-    subrerion: string[]
+    subregion: string[]
     languages: Record<string, string>
     borders: string[]
 }
