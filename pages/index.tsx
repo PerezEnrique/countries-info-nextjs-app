@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<{
   };
 };
 
-export default function index({
+export default function Homepage({
   countries,
   regions,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
