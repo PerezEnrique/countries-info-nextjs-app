@@ -3,7 +3,18 @@ import config from "../config.json";
 import { Country } from "countries.types";
 
 const baseApiUrl = config.baseApiUrl;
-const fields = ["name", "flags", "region", "subregion", "capital", "currencies", "languages", "tld", "borders", "cca3"]
+const fields = [
+  "name",
+  "flags",
+  "region",
+  "subregion",
+  "capital",
+  "currencies",
+  "languages",
+  "tld",
+  "borders",
+  "cca3",
+];
 const fieldsString = fields.join(",");
 
 export const getCountries = () => {
@@ -21,4 +32,3 @@ export const getRegions = (countries: Country[]) => {
   regionsArray.unshift("All");
   return regionsArray;
 };
-
