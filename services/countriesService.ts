@@ -21,6 +21,10 @@ export const getCountries = () => {
   return http.get(`${baseApiUrl}/all?fields=${fieldsString}`);
 };
 
+export const getSingleCountry = (code: string) => {
+  return http.get(`${baseApiUrl}/alpha/${code}`)
+}
+
 export const getRegions = (countries: Country[]) => {
   const regionsSet = new Set<string>();
 
@@ -32,3 +36,14 @@ export const getRegions = (countries: Country[]) => {
   regionsArray.unshift("All");
   return regionsArray;
 };
+
+export const getBorders = async (codes: string[]) => {
+  const countries = await getCountries();
+
+  return codes.map((code) => {
+    return countries.find((country: Country) => {
+      return country.cca3 === code;
+    }).name.common
+  })
+
+}
