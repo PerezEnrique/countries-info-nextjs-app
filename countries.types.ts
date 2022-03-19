@@ -13,10 +13,13 @@ export type Country = {
   };
   tld?: string[];
   cca3: string;
-  currencies?: Record<string, {
-    name: string
-    symbol: string
-  }>;
+  currencies?: Record<
+    string,
+    {
+      name: string;
+      symbol: string;
+    }
+  >;
   capital?: string[];
   region: string;
   subregion?: string;
