@@ -1,0 +1,386 @@
+//VARIABLES
+:root {
+  --background: hsl(0, 0%, 98%);
+  --elements: hsl(0, 0%, 100%);
+  --primary-text: hsl(200, 15%, 8%);
+  --secondary-text: hsl(0, 0%, 52%);
+  --elements-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.1);
+  --primary-font: "Nunito sans", sans-serif;
+  --content-max-width: 1400px;
+  --filter-width: 15rem;
+  --card-max-width: 295px;
+}
+
+:root.dark-theme {
+  --background: hsl(207, 26%, 17%);
+  --elements: hsl(209, 23%, 22%);
+  --primary-text: hsl(0, 0%, 100%);
+  --secondary-text: hsl(0, 0%, 100%);
+}
+
+//SASS MIXINS
+@mixin element-container-style() {
+  border-radius: 5px;
+  box-shadow: var(--elements-shadow);
+  background-color: var(--elements);
+}
+
+//RESETTING SOME CSS STYLES
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--primary-font);
+  background-color: var(--background);
+  color: var(--primary-text);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture > source {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+dd {
+  margin: 0;
+}
+
+//STYLING
+.header {
+  margin-bottom: 25px;
+  padding: 1rem 5%;
+  background-color: var(--elements);
+  box-shadow: var(--elements-shadow);
+  display: flex;
+  justify-content: space-between;
+  & h1 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    //inheriting color from body
+  }
+
+  &__btn {
+    // position: relative;
+    border: none;
+    background-color: transparent;
+    font-family: var(--primary-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--primary-text);
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 0 2px var(--secondary-text);
+    }
+    &__icon {
+      position: relative;
+      top: 2px;
+      margin-right: 0.25rem;
+      font-size: 1rem;
+    }
+  }
+}
+
+.filters-section {
+  width: 90%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.search-box {
+  width: 90%;
+  max-width: 500px;
+  padding: 1rem 5%;
+  margin-bottom: 40px;
+  @include element-container-style();
+  display: flex;
+  align-items: center;
+
+  &:focus-within {
+    box-shadow: 0 0 0 2px var(--secondary-text);
+  }
+
+  &__icon {
+    position: relative;
+    top: -2px;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--secondary-text);
+  }
+
+  &__input {
+    width: 85%;
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+    background-color: var(--elements);
+    color: var(--secondary-text);
+    letter-spacing: 0.25px;
+
+    &::placeholder {
+      color: var(--secondary-text);
+    }
+  }
+}
+
+.filter {
+  width: var(--filter-width);
+  margin-bottom: 40px;
+
+  &:focus-within &__dropdown {
+    box-shadow: 0 0 0 2px var(--secondary-text);
+  }
+
+  &__dropdown {
+    width: 100%;
+    padding: 1rem 15%;
+    margin-bottom: 5px;
+    border: none;
+    color: var(--primary-text);
+    outline: none;
+    font-family: var(--primary-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    @include element-container-style();
+    &__icon {
+      position: absolute;
+      font-size: 1.7rem;
+      top: 12.5px;
+      right: 8%;
+    }
+
+    &__box {
+      display: none;
+      width: 100%;
+      max-width: var(--filter-width);
+      padding: 1rem 0;
+      border: none;
+      position: absolute;
+      z-index: 2;
+      @include element-container-style();
+
+      &--active {
+        display: block !important;
+      }
+
+      &__option {
+        padding: 0.25rem 15%;
+        font-size: 0.9rem;
+        font-weight: 600;
+        list-style-type: none;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--background);
+        }
+      }
+    }
+  }
+}
+
+.card-grid {
+  width: 90%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  justify-items: center;
+  column-gap: 15px;
+
+  &__no-item-message {
+    text-align: center;
+  }
+}
+
+.card {
+  max-width: var(--card-max-width);
+  margin-bottom: 60px;
+  @include element-container-style();
+  overflow: hidden;
+
+  &__body {
+    &__text {
+      width: 90%;
+      margin: 40px auto;
+
+      & h2 {
+        font-size: 1.25rem;
+      }
+
+      & .desc-list {
+        font-size: 0.9rem;
+
+        &__item {
+          display: flex;
+          justify-content: flex-start;
+
+          &__term {
+            margin-right: 0.25rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+//COUNTRY PAGE
+.go-back-link {
+  position: relative;
+  //next two properties will override the ones setted on .btn-link "base class"
+  padding-left: 2.8rem !important;
+  margin-left: 7.5%;
+  margin-bottom: 40px !important;
+}
+
+.go-back-icon {
+  position: absolute;
+  top: 5px;
+  left: 1rem;
+  font-size: 1.8rem;
+}
+
+.country-article {
+  width: 85%;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  &__media {
+    margin-bottom: 40px;
+  }
+
+  &__text {
+    &__desc-lists {
+      & .desc-list {
+        font-size: 0.9rem;
+        margin-bottom: 40px;
+
+        &__item {
+          display: flex;
+          justify-content: flex-start;
+          margin-bottom: 7px;
+
+          &__term {
+            margin-right: 0.25rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    &__border-countries {
+      & .btn-link {
+        font-size: 0.9rem;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+//NOT FOUND PAGE
+.not-found-page {
+  width: 90%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+//OTHERS
+.main-heading {
+  font-size: 1.5rem;
+}
+
+.heading-link {
+  text-decoration: none;
+  color: var(--primary-text);
+}
+
+.btn-link {
+  display: inline-block;
+  padding: 0.5rem 2em; //em because the padding of elements using this class should depend on their font-size
+  margin-bottom: 16px;
+  @include element-container-style();
+  color: var(--primary-text);
+  text-decoration: none;
+}
+
+.error-message {
+  text-align: center;
+}
+
+//LOADER (shout out to Temani Afif for creating this loader. https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje)
+.shapes-1 {
+  width: 80px;
+  height: 80px;
+  margin: 25px auto 0;
+  border-radius: 50%;
+  background: #f03355;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  animation: sh1 2s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@keyframes sh1 {
+  33% {
+    border-radius: 0;
+    background: #514b82;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  66% {
+    border-radius: 0;
+    background: #ffa516;
+    clip-path: polygon(50% 0, 50% 0, 100% 100%, 0 100%);
+  }
+}
+
+//DESKTOP STYLES
+
+@media (min-width: 1000px) {
+  .filters-section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(285px, var(--card-max-width))
+    );
+    justify-items: initial;
+    justify-content: space-between;
+    //Since columns are no longer setted to 1fr, they have a max-width, making them smaller than the parent container.
+    //This way we are able to use justify-content
+    //Items now use the whole width of the column, so justify-items is no longer necessary
+  }
+
+  .country-article {
+    display: flex;
+    max-width: initial;
+    &__media {
+      width: 50%;
+    }
+
+    &__text {
+      width: 50%;
+      padding: 0 2rem;
+      &__desc-lists {
+        display: flex;
+        justify-content: space-between;
+      }
+      &__border-countries h3 {
+        display: inline-block;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
