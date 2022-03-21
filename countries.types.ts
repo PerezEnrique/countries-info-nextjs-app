@@ -26,3 +26,8 @@ export type Country = {
   languages?: Record<string, string>;
   borders?: string[];
 };
+
+export type CustomBorder = {
+  commonName: string
+  alpha3code: string
+}

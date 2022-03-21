@@ -12,7 +12,7 @@ import type {
   GetStaticProps,
   InferGetStaticPropsType,
 } from "next";
-import type { Country } from "countries.types";
+import type { Country, CustomBorder } from "countries.types";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const countries = await getCountries();
@@ -29,11 +29,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<{
   country: Country;
-  borders: string[];
+  borders: CustomBorder[];
 }> = async ({ params }) => {
   const country = await getSingleCountry(params?.alpha3code as string);
 
-  let borders = [];
+  let borders: CustomBorder[] = [];
 
   if (country[0].borders) {
     borders = borders = await getBorders(country[0].borders);
@@ -61,6 +61,7 @@ export default function Country({
     languages,
     tld,
   } = country;
+
 
   let currenciesArray;
   let languagesArray;
@@ -158,10 +159,10 @@ export default function Country({
                     key={uuidv4()}
                     href={{
                       pathname: "/country/[alpha3code]",
-                      query: { alpha3code: border },
+                      query: { alpha3code: border.alpha3code },
                     }}
                   >
-                    <a className="btn-link">{border}</a>
+                    <a className="btn-link">{border.commonName}</a>
                   </Link>
                 ))
               )}
