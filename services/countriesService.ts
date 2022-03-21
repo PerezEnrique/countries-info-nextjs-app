@@ -1,6 +1,6 @@
 import http from "./httpService";
 import config from "../config.json";
-import { Country } from "countries.types";
+import { Country, CustomBorder } from "countries.types";
 
 const baseApiUrl = config.baseApiUrl;
 const fields = [
@@ -41,8 +41,15 @@ export const getBorders = async (codes: string[]) => {
   const countries = await getCountries();
 
   return codes.map((code) => {
-    return countries.find((country: Country) => {
+  
+    
+    const borderCountry = countries.find((country: Country) => {
       return country.cca3 === code;
-    }).name.common;
+    })
+
+    return {
+      commonName: borderCountry.name.common,
+      alpha3code: borderCountry.cca3 
+    }
   });
 };
